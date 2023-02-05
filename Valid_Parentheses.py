@@ -1,12 +1,12 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         valid = {'(': ')', '[': ']', '{': '}'}
-        indices = [x * 2 for x in range(len(s) // 2)]
+        l = []
 
-        for i in indices:
-            currentP = s[i]
-            nextP = s[i+1]
-            if nextP != valid[currentP]:
-                return False
-        return True
-
+        for c in s:
+            if c in valid.keys():
+                l.insert(0, valid[c])
+            else:
+                if len(l) == 0 or l.pop(0) != c:
+                    return False
+        return len(l) == 0
